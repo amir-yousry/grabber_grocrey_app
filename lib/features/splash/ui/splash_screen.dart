@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:grabber_grocrey_app/features/home/ui/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,9 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Splash Screen'),
-      )
+      backgroundColor: Colors.white,
+      body: Center(child: SvgPicture.asset('assets/logo/logo.svg')),
     );
   }
 }
