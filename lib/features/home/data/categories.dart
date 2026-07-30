@@ -5,5 +5,5 @@ List<Category> category = [
   Category(name: 'Milk & Egg', image: "assets/category/egg.png"),
   Category(name: 'Bavergas', image: "assets/category/bavergas.png"),
   Category(name: 'luandry', image: "assets/category/luandry.png"),
-  Category(name: 'luandry', image: "assets/category/luandry.png"),
+  Category(name: 'Fruits', image: "assets/category/fruits.png"),
 ];

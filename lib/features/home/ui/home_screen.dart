@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:grabber_grocrey_app/core/constants/colors.dart';
+import 'package:grabber_grocrey_app/features/home/data/categories.dart';
 import 'package:grabber_grocrey_app/features/home/data/items.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -27,6 +29,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            
             /// banner
             CarouselSlider.builder(
               itemCount: items.length,
@@ -42,6 +45,64 @@ class HomeScreen extends StatelessWidget {
                 autoPlayAnimationDuration: Duration(seconds: 3),
                 autoPlayCurve: Curves.ease,
                 enlargeCenterPage: true,
+              ),
+            ),
+
+            /// category
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(category.length, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 35,
+                          backgroundColor: Colors.grey.shade100,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Image.asset(
+                              category[index].image,
+                              width: 50,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          category[index].name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Fruits",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                  Text(
+                    "See all",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
