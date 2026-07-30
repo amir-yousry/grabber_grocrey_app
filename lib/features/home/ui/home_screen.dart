@@ -24,6 +24,29 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            /// banner
+            CarouselSlider.builder(
+              itemCount: items.length,
+              itemBuilder:
+                  (BuildContext context, int itemIndex, int pageViewIndex) =>
+                      Image.asset(items[itemIndex]),
+              options: CarouselOptions(
+                height: 170,
+                aspectRatio: 1,
+                viewportFraction: 0.6,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 3),
+                autoPlayAnimationDuration: Duration(seconds: 3),
+                autoPlayCurve: Curves.ease,
+                enlargeCenterPage: true,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
