@@ -1,6 +1,6 @@
 import 'package:grabber_grocrey_app/features/home/models/product.dart';
 
-List<Product> product = [
+List<Product> products = [
   Product(
     name: "Banana",
     image: "assets/fruits/banana.png",
