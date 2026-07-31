@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grabber_grocrey_app/features/home/ui/home_screen.dart';
+import 'package:grabber_grocrey_app/features/splash/ui/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
