@@ -1,6 +1,6 @@
 import 'package:grabber_grocrey_app/features/home/models/category.dart';
 
-List<Category> category = [
+List<Category> categories = [
   Category(name: 'Fruits', image: "assets/category/fruits.png"),
   Category(name: 'Milk & Egg', image: "assets/category/egg.png"),
   Category(name: 'Bavergas', image: "assets/category/bavergas.png"),

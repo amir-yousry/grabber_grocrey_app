@@ -1,12 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:grabber_grocrey_app/core/constants/colors.dart';
 import 'package:grabber_grocrey_app/features/home/data/categories.dart';
 import 'package:grabber_grocrey_app/features/home/data/items.dart';
+import 'package:grabber_grocrey_app/features/home/data/products.dart';
+import 'package:grabber_grocrey_app/features/home/models/product.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  bool isSelected(Product product) => false;
+  void toggleSelection(Product product) {}
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +35,6 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            
             /// banner
             CarouselSlider.builder(
               itemCount: items.length,
@@ -52,7 +57,7 @@ class HomeScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: List.generate(category.length, (index) {
+                children: List.generate(categories.length, (index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Column(
@@ -63,14 +68,14 @@ class HomeScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Image.asset(
-                              category[index].image,
+                              categories[index].image,
                               width: 50,
                             ),
                           ),
                         ),
                         SizedBox(height: 10),
                         Text(
-                          category[index].name,
+                          categories[index].name,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 10,
@@ -103,6 +108,107 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            /// products
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  children: List.generate(products.length, (index) {
+                    final product = products[index];
+                    return Card(
+                      color: Colors.white,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Stack(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade50,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  width: 140,
+                                  height: 120,
+                                  padding: EdgeInsets.all(10),
+                                  child: Image.asset(product.image),
+                                ),
+                                Positioned(
+                                  bottom: 6,
+                                  right: 5,
+                                  child: GestureDetector(
+                                    onTap: () => toggleSelection(product),
+                                    child: CircleAvatar(
+                                      radius: 16,
+                                      backgroundColor: Colors.white,
+                                      child: isSelected(product)
+                                          ? Icon(
+                                              CupertinoIcons.delete,
+                                              color: Colors.red.shade900,
+                                              size: 15,
+                                            )
+                                          : Icon(Icons.add),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 140,
+                                  child: Text(
+                                    product.name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset(
+                                      "assets/icons/star.png",
+                                      width: 18,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      '${product.rate} (${product.rateCount})',
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  '\$ ${product.price}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                ),
               ),
             ),
           ],
